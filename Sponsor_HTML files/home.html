@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SponsorConnect – Landing Page</title>
+  <style>
+    :root {
+      --dark: #344E41;
+      --darker: #2c3e34;
+      --medium: #3A5A40;
+      --accent: #588157;
+      --light: #A3B18A;
+      --extra-light: #DAD7CD;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--dark);
+      color: var(--extra-light);
+    }
+
+    /* Navbar */
+    nav {
+      background-color: var(--darker);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--light);
+      letter-spacing: 1px;
+    }
+
+    nav .nav-links a {
+      margin-left: 20px;
+      color: var(--extra-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease-in;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #ffe6a7;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #bb9457;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-button {
+      background-color: var(--accent);
+      color: #eae2b7;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: var(--light);
+    }
+
+    /* About Section */
+    .about {
+      padding: 60px 20px;
+      background-color: var(--darker);
+      text-align: center;
+    }
+
+    .about h2 {
+      color: var(--light);
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .about p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: var(--extra-light);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .cta-button {
+        width: 100%;
+        padding: 12px;
+      }
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav .nav-links {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">SponsorConnect</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="/organizer-signup">Organizer</a>
+      <a href="/sponsor-signup">Sponsor</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1>Welcome to SponsorConnect</h1>
+    <p>Where college clubs meet brands. Simplifying sponsorships with smart proposals, clear packages, and measurable impact.</p>
+    <div class="button-group">
+      <a href="/organizer-signup" class="cta-button">I'm an Organizer</a>
+      <a href="signup_sponsor.html" class="cta-button">Become a Sponsor</a>
+    </div>
+  </section>
+
+  <!-- About Sponsorship Section -->
+  <section class="about" id="about">
+    <h2>Why Sponsor College Events?</h2>
+    <p>
+      Sponsoring college events is one of the most cost-effective and high-impact ways to build your brand among young, tech-savvy, and socially active audiences. With SponsorConnect, your brand gets premium exposure through student-run events, ranging from tech fests and hackathons to cultural shows and entrepreneurship summits — all while helping student communities thrive.
+    </p>
+  </section>
+
+</body>
+<script type="module">
+  import { auth, db } from './js/firebase-init.js';
+
+  console.log("Firebase Auth:", auth);
+  console.log("Firestore DB:", db);
+
+  // Example: Check if user is logged in
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      console.log("User logged in:", user.email);
+    } else {
+      console.log("No user logged in");
+    }
+  });
+</script>
+
+</html>

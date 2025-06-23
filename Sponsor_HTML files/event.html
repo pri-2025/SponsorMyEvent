@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Details – SponsorConnect</title>
+  <style>
+    :root {
+      --bg: #14213D;
+      --card-bg: #1A2A4F;
+      --primary: #FCA311;
+      --text: #E5E5E5;
+      --hover: #3A86FF;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background-color: var(--card-bg);
+      padding: 20px 30px;
+      text-align: center;
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      background-color: #2c7da0;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .info {
+      line-height: 1.6;
+    }
+
+    .tiers, .addons {
+      margin-top: 15px;
+    }
+
+    .tiers div, .addons div {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #223458;
+      border-radius: 8px;
+    }
+
+    .social-links a {
+      margin-right: 15px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: var(--hover);
+      text-decoration: underline;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--hover);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: var(--bg);
+    }
+
+    .proposal iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>Event Details – TechFest 2025</header>
+
+<div class="container">
+
+  <!-- Club Information -->
+  <div class="section">
+    <h2>Organized By: Tech Club, IIT Delhi</h2>
+    <div class="info">
+      📍 Location: New Delhi<br>
+      📅 Date: Sept 20–22, 2025<br>
+      📞 Contact: Ankit Mehta (President)<br>
+      📧 Email: techclub@iitd.ac.in
+    </div>
+  </div>
+
+  <!-- Proposal Preview -->
+  <div class="section proposal">
+    <h2>View Proposal</h2>
+    <p>Here is the official sponsorship proposal document:</p>
+    <iframe src="proposal-sample.pdf"></iframe>
+    <p><a href="proposal-sample.pdf" target="_blank" style="color: var(--hover);">📥 Download Proposal (PDF)</a></p>
+  </div>
+
+  <!-- Sponsorship Tiers -->
+  <div class="section">
+    <h2>Sponsorship Tiers</h2>
+    <div class="tiers">
+      <div><strong>Gold – ₹30,000</strong><br>Logo on all banners, stall access, keynote speech slot</div>
+      <div><strong>Silver – ₹15,000</strong><br>Logo on digital banners, social media mention</div>
+      <div><strong>Custom – Flexible</strong><br>We can tailor a package based on your needs.</div>
+    </div>
+  </div>
+
+  <!-- Add-Ons -->
+  <div class="section">
+    <h2>Add-On Opportunities</h2>
+    <div class="addons">
+      <div>🎥 Branding in Aftermovie</div>
+      <div>🏷️ Swag & Merchandise Insertion</div>
+      <div>📦 Booth Space Near Main Hall</div>
+    </div>
+  </div>
+
+  <!-- Social Media -->
+  <div class="section">
+    <h2>Connect with Us</h2>
+    <div class="social-links">
+      <a href="https://instagram.com/techclubiitd" target="_blank">📸 Instagram</a>
+      <a href="https://linkedin.com/in/techclubiitd" target="_blank">🔗 LinkedIn</a>
+      <a href="mailto:techclub@iitd.ac.in">📧 Email</a>
+    </div>
+  </div>
+
+  <!-- CTA Buttons -->
+  <div class="section">
+    <h2>Next Steps</h2>
+    <div class="buttons">
+      <button class="btn btn-primary">💬 Contact Organizer</button>
+      <button class="btn btn-outline">📤 Send Sponsorship Offer</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+<script type="module">
+  import { auth, db } from './js/firebase-init.js';
+
+  console.log("Firebase Auth:", auth);
+  console.log("Firestore DB:", db);
+
+  // Example: Check if user is logged in
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      console.log("User logged in:", user.email);
+    } else {
+      console.log("No user logged in");
+    }
+  });
+</script>
+
+</html>

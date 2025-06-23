@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sponsor Signup – SponsorConnect</title>
+  <style>
+    :root {
+      --dark: #344E41;
+      --medium-dark: #3A5A40;
+      --accent: #588157;
+      --light: #A3B18A;
+      --extra-light: #DAD7CD;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--dark);
+      color: var(--extra-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-container {
+      background-color: var(--medium-dark);
+      padding: 40px 50px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ffe6a7;
+    }
+
+    .signup-container form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: var(--extra-light);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--light);
+      border-radius: 6px;
+      background-color: transparent;
+      color: var(--extra-light);
+      font-size: 1rem;
+    }
+
+    .form-group input::placeholder {
+      color: #bfcbbf;
+    }
+
+    .signup-btn {
+      background-color: var(--accent);
+      color: #efebce;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .signup-btn:hover {
+      background-color: var(--light);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: var(--light);
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .signup-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Sponsor Signup</h2>
+    <form action="sponsor-dashboard.html" method="POST">
+      <div class="form-group">
+        <label for="companyName">Company Name</label>
+        <input type="text" id="companyName" name="companyName" placeholder="e.g., TechNova Pvt. Ltd." required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Official Email</label>
+        <input type="email" id="email" name="email" placeholder="e.g., contact@technova.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="contactPerson">Contact Person</label>
+        <input type="text" id="contactPerson" name="contactPerson" placeholder="e.g., Rahul Mehta" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="e.g., +91 9876543210" required />
+      </div>
+
+      <div class="form-group">
+        <label for="website">Company Website (optional)</label>
+        <input type="url" id="website" name="website" placeholder="e.g., https://technova.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Create Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <button type="submit" class="signup-btn">Register as Sponsor</button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="/sponsor-login">Login here</a>
+    </div>
+  </div>
+
+</body>
+
+<script type="module">
+  import { auth, db } from './js/firebase-init.js';
+
+  console.log("Firebase Auth:", auth);
+  console.log("Firestore DB:", db);
+
+  // Example: Check if user is logged in
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      console.log("User logged in:", user.email);
+    } else {
+      console.log("No user logged in");
+    }
+  });
+</script>
+
+</html>
