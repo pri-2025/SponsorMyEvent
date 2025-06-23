@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sponsor Dashboard – Discover Events</title>
+  <style>
+    :root {
+      --dark: #344E41;
+      --medium-dark: #3A5A40;
+      --accent: #588157;
+      --light: #A3B18A;
+      --extra-light: #DAD7CD;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--dark);
+      color: var(--extra-light);
+    }
+
+    header {
+      background-color: var(--medium-dark);
+      padding: 15px 30px;
+      text-align: center;
+      font-size: 1.6rem;
+      color: var(--light);
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+      justify-content: space-between;
+    }
+
+    .filters select, .filters input {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--light);
+      background-color: var(--medium-dark);
+      color: var(--extra-light);
+    }
+
+    .event-card {
+      background-color: var(--medium-dark);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .event-title {
+      font-size: 1.4rem;
+      color: var(--light);
+      margin-bottom: 8px;
+    }
+
+    .event-details {
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .event-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    .express-btn {
+      background-color: var(--accent);
+      color: var(--dark);
+    }
+
+    .express-btn:hover {
+      background-color: var(--light);
+    }
+
+    .save-btn {
+      background-color: transparent;
+      color: var(--extra-light);
+      border: 1px solid var(--extra-light);
+    }
+
+    .save-btn:hover {
+      background-color: var(--accent);
+      color: var(--dark);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 700px) {
+      .filters {
+        flex-direction: column;
+      }
+      .event-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Sponsor Dashboard – Discover Events</header>
+
+  <div class="container">
+    <!-- Filters -->
+    <div class="filters">
+      <select name="eventType">
+        <option value="">Event Type</option>
+        <option>Technical</option>
+        <option>Cultural</option>
+        <option>Sports</option>
+      </select>
+
+      <input type="text" placeholder="College or Location" />
+
+      <input type="date" title="From Date" />
+      <input type="date" title="To Date" />
+
+      <input type="number" placeholder="Min Budget ₹" />
+      <input type="number" placeholder="Max Budget ₹" />
+
+      <input type="number" placeholder="Audience Size" />
+    </div>
+
+    <!-- Sample Event Cards -->
+<div class="event-card">
+  <div class="event-title">
+    <a href="event.html" style="color: var(--light); text-decoration: none;">
+      TechFest 2025 – Hackathon
+    </a>
+  </div>
+  <div class="event-details">
+    📍 IIT Delhi | 🗓️ Sept 20–22 | 👥 1000+ Audience<br>
+    💰 Sponsorship Tiers: Gold ₹30k, Silver ₹15k, Bronze ₹8k
+  </div>
+  <div class="event-actions">
+    <button class="btn express-btn">Express Interest</button>
+    <button class="btn save-btn">Save for Later</button>
+    <a href="event.html" class="btn btn-outline" style = "color: #efebce">View Details</a>
+  </div>
+</div>
+
+<div class="event-card">
+  <div class="event-title">
+    <a href="event.html" style="color: var(--light); text-decoration: none;">
+      Spandan – Intercollege Cultural Fest
+    </a>
+  </div>
+  <div class="event-details">
+    📍 NIT Trichy | 🗓️ Oct 5–7 | 👥 3000+ Audience<br>
+    💰 Sponsorship Tiers: Title ₹50k, Gold ₹25k, Supporter ₹10k
+  </div>
+  <div class="event-actions">
+    <button class="btn express-btn">Express Interest</button>
+    <button class="btn save-btn">Save for Later</button>
+    <a href="event.html" class="btn btn-outline" style = "color: #efebce">View Details</a>
+  </div>
+</div>
+
+<!-- Add more cards dynamically or manually -->
+
+<script type="module">
+  import { auth, db } from './js/firebase-init.js';
+
+  console.log("Firebase Auth:", auth);
+  console.log("Firestore DB:", db);
+
+  // Example: Check if user is logged in
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      console.log("User logged in:", user.email);
+    } else {
+      console.log("No user logged in");
+    }
+  });
+</script>
+</html>
