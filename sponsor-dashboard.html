@@ -184,22 +184,21 @@
 </div>
 
 <!-- Add more cards dynamically or manually -->
-
 <script type="module">
   import { auth, db } from './js/firebase-init.js';
 
-  console.log("Firebase Auth:", auth);
-  console.log("Firestore DB:", db);
-
-  // Example: Check if user is logged in
+  // Example usage:
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log("User logged in:", user.email);
+      console.log("✅ Logged in as:", user.email);
     } else {
-      console.log("No user logged in");
+      console.log("⛔ No user logged in.");
     }
   });
+
+  // Now you can use: auth, db, storage in this file
 </script>
+</body>
 </html>
