@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SponsorConnect – Landing Page</title>
+  <title>FundSync – Landing Page</title>
   <style>
     :root {
       --dark: #344E41;
@@ -154,7 +154,7 @@
 
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <h1>Welcome to SponsorConnect</h1>
+    <h1>Welcome to FundSync</h1>
     <p>Where college clubs meet brands. Simplifying sponsorships with smart proposals, clear packages, and measurable impact.</p>
     <div class="button-group">
       <a href="/organizer-signup" class="cta-button">I'm an Organizer</a>
@@ -170,23 +170,21 @@
     </p>
   </section>
 
-</body>
 <script type="module">
   import { auth, db } from './js/firebase-init.js';
 
-  console.log("Firebase Auth:", auth);
-  console.log("Firestore DB:", db);
-
-  // Example: Check if user is logged in
+  // Example usage:
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log("User logged in:", user.email);
+      console.log("✅ Logged in as:", user.email);
     } else {
-      console.log("No user logged in");
+      console.log("⛔ No user logged in.");
     }
   });
-</script>
 
+  // Now you can use: auth, db, storage in this file
+</script>
+</body>
 </html>
