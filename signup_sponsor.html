@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sponsor Signup – SponsorConnect</title>
+  <title>Sponsor Signup – FundSync</title>
   <style>
     :root {
       --dark: #344E41;
@@ -39,11 +39,6 @@
       color: #ffe6a7;
     }
 
-    .signup-container form {
-      display: flex;
-      flex-direction: column;
-    }
-
     .form-group {
       margin-bottom: 18px;
     }
@@ -52,7 +47,6 @@
       display: block;
       margin-bottom: 6px;
       font-weight: 500;
-      color: var(--extra-light);
     }
 
     .form-group input {
@@ -79,6 +73,7 @@
       cursor: pointer;
       font-weight: bold;
       transition: background-color 0.3s;
+      width: 100%;
     }
 
     .signup-btn:hover {
@@ -111,63 +106,61 @@
 
   <div class="signup-container">
     <h2>Sponsor Signup</h2>
-    <form action="sponsor-dashboard.html" method="POST">
+    <form id="signupForm">
       <div class="form-group">
         <label for="companyName">Company Name</label>
-        <input type="text" id="companyName" name="companyName" placeholder="e.g., TechNova Pvt. Ltd." required />
+        <input type="text" id="companyName" required />
       </div>
 
       <div class="form-group">
         <label for="email">Official Email</label>
-        <input type="email" id="email" name="email" placeholder="e.g., contact@technova.com" required />
+        <input type="email" id="email" required />
       </div>
 
       <div class="form-group">
         <label for="contactPerson">Contact Person</label>
-        <input type="text" id="contactPerson" name="contactPerson" placeholder="e.g., Rahul Mehta" required />
+        <input type="text" id="contactPerson" required />
       </div>
 
       <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="e.g., +91 9876543210" required />
+        <input type="tel" id="phone" required />
       </div>
 
       <div class="form-group">
         <label for="website">Company Website (optional)</label>
-        <input type="url" id="website" name="website" placeholder="e.g., https://technova.com" />
+        <input type="url" id="website" />
       </div>
 
       <div class="form-group">
         <label for="password">Create Password</label>
-        <input type="password" id="password" name="password" required />
+        <input type="password" id="password" required />
       </div>
 
       <button type="submit" class="signup-btn">Register as Sponsor</button>
     </form>
 
     <div class="login-link">
-      Already have an account? <a href="/sponsor-login">Login here</a>
+      Already have an account? <a href="sponsor-login.html">Login here</a>
     </div>
   </div>
 
-</body>
-
-<script type="module">
+  <script type="module">
   import { auth, db } from './js/firebase-init.js';
 
-  console.log("Firebase Auth:", auth);
-  console.log("Firestore DB:", db);
-
-  // Example: Check if user is logged in
+  // Example usage:
   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log("User logged in:", user.email);
+      console.log("✅ Logged in as:", user.email);
     } else {
-      console.log("No user logged in");
+      console.log("⛔ No user logged in.");
     }
   });
+
+  // Now you can use: auth, db, storage in this file
 </script>
 
+</body>
 </html>
