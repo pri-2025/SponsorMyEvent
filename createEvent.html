@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Event</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #e9f2ff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      background-color: #0d6efd;
+    }
+
+    .navbar-brand, .nav-link {
+      color: white !important;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      color: #0d6efd;
+    }
+
+    .form-section {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.1);
+      border: 2px solid #cce0ff;
+    }
+
+    label {
+      font-weight: 500;
+      color: #0b5ed7;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      border-color: #0b5ed7;
+    }
+
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+
+    .btn-danger {
+      padding: 5px 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .sponsor-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .sponsor-row input,
+    .sponsor-row textarea {
+      flex: 1;
+    }
+
+    .tier-note {
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ✅ NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand" href="#">🎓 SponsorMyEvent</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/past-events">Past Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="/profile/edit">Edit Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ✅ CREATE EVENT FORM -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">📅 Create New Event</h2>
+
+  <form action="/submit_event" method="POST" enctype="multipart/form-data" class="form-section">
+
+    <!-- Basic Details -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="event_name" class="form-label">Event Name</label>
+        <input type="text" class="form-control" id="event_name" name="event_name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="event_type" class="form-label">Event Type</label>
+        <select class="form-select" id="event_type" name="event_type" required>
+          <option value="">Select</option>
+          <option value="Technical">Technical</option>
+          <option value="Cultural">Cultural</option>
+          <option value="Sports">Sports</option>
+          <option value="Seminar">Seminar</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="date" class="form-label">Event Date</label>
+        <input type="date" class="form-control" id="date" name="date" required>
+      </div>
+      <div class="col-md-4">
+        <label for="duration" class="form-label">Duration (in hours)</label>
+        <input type="number" class="form-control" id="duration" name="duration" required>
+      </div>
+      <div class="col-md-4">
+        <label for="audience" class="form-label">Target Audience</label>
+        <select class="form-select" id="audience" name="audience" required>
+          <option value="">Select</option>
+          <option value="College">College</option>
+          <option value="Intercollege">Intercollege</option>
+          <option value="Public">Public</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="footfall" class="form-label">Estimated Footfall</label>
+      <input type="number" class="form-control" id="footfall" name="footfall" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="budget" class="form-label">Sponsorship Budget Requirement (₹)</label>
+      <input type="number" class="form-control" id="budget" name="budget" required>
+    </div>
+
+    <!-- Dynamic Sponsorship Tiers with Facilities -->
+    <div class="mb-3">
+      <label class="form-label">Sponsorship Tiers & Facilities</label>
+      <div class="tier-note">Mention tier name, amount, and what facilities (e.g., banners, booths) will be provided.</div>
+      <div id="sponsorship-tiers">
+        <div class="sponsor-row">
+          <input type="text" name="tier_name[]" class="form-control" placeholder="Tier Name (e.g., Gold)">
+          <input type="number" name="tier_amount[]" class="form-control" placeholder="Amount (e.g., 15000)">
+        </div>
+        <div class="sponsor-row">
+          <textarea name="tier_facility[]" class="form-control" placeholder="Facilities for this tier (e.g., stage time, social media tags, banners)" rows="2"></textarea>
+          <button type="button" class="btn btn-danger" onclick="removeTier(this)">×</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addTier()">+ Add Another Tier</button>
+    </div>
+
+    <!-- Proposal Upload & Preview -->
+    <div class="mb-3">
+      <label for="proposal" class="form-label">Upload Sponsorship Proposal (PDF)</label>
+      <input class="form-control" type="file" id="proposal" name="proposal" accept="application/pdf">
+      <iframe id="proposalPreview" style="display: none;"></iframe>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary px-5">Submit Event</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- JS for Dynamic Tiers & PDF Preview -->
+<script>
+  function addTier() {
+    const container = document.getElementById("sponsorship-tiers");
+
+    const inputRow = document.createElement("div");
+    inputRow.className = "sponsor-row";
+    inputRow.innerHTML = `
+      <input type="text" name="tier_name[]" class="form-control" placeholder="Tier Name">
+      <input type="number" name="tier_amount[]" class="form-control" placeholder="Amount">
+    `;
+
+    const textareaRow = document.createElement("div");
+    textareaRow.className = "sponsor-row";
+    textareaRow.innerHTML = `
+      <textarea name="tier_facility[]" class="form-control" placeholder="Facilities for this tier" rows="2"></textarea>
+      <button type="button" class="btn btn-danger" onclick="removeTier(this)">×</button>
+    `;
+
+    container.appendChild(inputRow);
+    container.appendChild(textareaRow);
+  }
+
+  function removeTier(btn) {
+    const row = btn.parentElement.previousElementSibling;
+    btn.parentElement.remove(); // remove textarea row
+    row.remove(); // remove input row
+  }
+
+  document.getElementById('proposal').addEventListener('change', function () {
+    const file = this.files[0];
+    const preview = document.getElementById('proposalPreview');
+    if (file && file.type === "application/pdf") {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
